@@ -1,9 +1,16 @@
 def substrings(phrase,dictionary)
-  dictionary.map {|word| word if phrase.include?(word)}.compact
-
+  dictionary.reduce(Hash.new(0)) do |result, word|
+    if phrase.include?(word)
+      result[word] += 1
+      result
+    else
+      result
+    end
+  end
+  
 end
 
 phrase = "howdy! backend development is fun! frontend development as well"
 dictionary = ["back", "end", "development", "front", "well", "how"]
 
-puts substrings(phrase,dictionary)
+p substrings(phrase,dictionary)
